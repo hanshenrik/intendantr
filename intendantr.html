@@ -1,0 +1,162 @@
+<head>
+  <title>intendantr</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">
+          <i class="fa fa-glass"></i>
+        </a>
+        <p class="navbar-text">
+          {{> loginButtons}}
+        </p>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+      <!-- <label class="hide-unavailable-drinks">
+        <input type="checkbox" checked="{{hideUnavailableDrinks}}" />
+        Hide Unavailable Drinks
+      </label> -->
+
+      <div class="row">
+        <div class="col-md-6">
+          <!-- <label class="hide-unavailable-liquors">
+            <input type="checkbox" checked="{{hideUnavailableLiquors}}" />
+            Hide Unavailable Liquors
+          </label> -->
+
+          <h1>Tilgjengelig sprit ({{availableLiquorsCount}})</h1>
+          
+          {{#if currentUser}}
+            <form class="new-liquor input-group input-group-lg">
+              <span class="input-group-addon"><i class="fa fa-flask"></i></span>
+              <input class="form-control" type="text" name="text" placeholder="Type to add new liquor" />
+            </form>
+          {{/if}}
+          
+          <ul>
+            {{#each liquors}}
+              {{> liquor}}
+            {{/each}}
+          </ul>
+        </div>
+
+        <div class="col-md-6">
+          <!-- <label class="hide-unavailable-mixers">
+            <input type="checkbox" checked="{{hideUnavailableMixers}}" />
+            Hide Unavailable Mixers
+          </label> -->
+
+          <h1>Tilgjengelig blandevann ({{availableMixersCount}})</h1>
+          {{#if currentUser}}
+            <form class="new-mixer input-group input-group-lg">
+              <span class="input-group-addon"><i class="fa fa-tint"></i></span>
+              <input class="form-control" type="text" name="text" placeholder="Type to add new mixer" />
+            </form>
+          {{/if}}
+          
+          <ul>
+            {{#each mixers}}
+              {{> mixer}}
+            {{/each}}
+          </ul>
+        </div>
+      </div>
+
+<!--     <i class="fa fa-3x fa-thumbs-up"></i>
+    <i class="fa fa-3x fa-thumbs-down"></i>
+    
+    <i class="fa fa-3x fa-glass"></i>
+    <i class="fa fa-3x fa-filter"></i>
+    <i class="fa fa-3x fa-beer"></i>
+    <i class="fa fa-3x fa-coffee"></i>
+    
+
+    <i class="fa fa-3x fa-tree"></i>
+    <i class="fa fa-3x fa-spoon"></i>
+    <i class="fa fa-3x fa-lemon-o"></i>
+    <i class="fa fa-3x fa-leaf"></i>
+    
+    <i class="fa fa-3x fa-warning"></i>
+    <i class="fa fa-3x fa-search"></i>
+    <i class="fa fa-3x fa-question-circle"></i>
+    <i class="fa fa-3x fa-sort-alpha-asc"></i>
+    <i class="fa fa-3x fa-sort-alpha-desc"></i>
+    
+    <i class="fa fa-3x fa-line-chart"></i>
+    <i class="fa fa-3x fa-bar-chart"></i>
+    <i class="fa fa-3x fa-area-chart"></i>
+    <i class="fa fa-3x fa-pie-chart"></i>
+    
+    <i class="fa fa-3x fa-heart"></i> -->
+  </div>
+</body>
+
+<template name="liquor">
+  <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+
+    {{#if isOwner}}
+      <button class="delete">&times;</button>
+      <!-- <button class="toggle-private">
+        {{#if private}}
+          Private
+        {{else}}
+          Public
+        {{/if}}
+      </button> -->
+    {{/if}}
+ 
+    <span class="text">{{name}}</span>
+  </li>
+</template>
+
+<template name="mixer">
+  <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+
+    {{#if isOwner}}
+      <button class="delete">&times;</button>
+      <!-- <button class="toggle-private">
+        {{#if private}}
+          Private
+        {{else}}
+          Public
+        {{/if}}
+      </button> -->
+    {{/if}}
+ 
+    <span class="text">{{name}}</span>
+  </li>
+</template>
+ 
+<!-- <template name="drink">
+  <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+    <button class="delete">&times;</button>
+ 
+    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
+
+    {{#if isOwner}}
+      <button class="toggle-private">
+        {{#if private}}
+          Private
+        {{else}}
+          Public
+        {{/if}}
+      </button>
+    {{/if}}
+ 
+    <span class="text"><strong>{{username}}</strong> - {{name}} </span> keep this, cool to see who 'created' the drink. charts etc.
+  </li>
+</template>
+ -->
