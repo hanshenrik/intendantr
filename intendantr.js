@@ -211,6 +211,12 @@ Meteor.methods({
       throw new Meteor.Error("not-authorized");
     }
 
+    // Don't allow empty name
+    if (name === '') {
+      throw new Meteor.Error("empty-input");
+      // TODO: show error message
+    }
+
     Liquors.insert({
       name: name,
       createdAt: new Date(),
@@ -248,10 +254,17 @@ Meteor.methods({
 
     Liquors.update(liquorId, { $set: { private: setToPrivate } });
   },
+
   addMixer: function (name) {
     // Make sure the user is logged in before inserting a drink
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");
+    }
+
+    // Don't allow empty name
+    if (name === '') {
+      throw new Meteor.Error("empty-input");
+      // TODO: show error message
     }
 
     Mixers.insert({
