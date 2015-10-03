@@ -37,61 +37,23 @@ header {
   display: block;
 }
 
-/*h1 {
-  font-size: 1.5em;
-  margin: 0;
-  margin-bottom: 10px;
-  display: inline-block;
-  margin-right: 1em;
-}*/
-
-/*form {
-  margin-top: 10px;
-  margin-bottom: -10px;
-  position: relative;
-}*/
-
-/*.new-drink input, .new-liquor input, .new-mixer input {
-  box-sizing: border-box;
-  padding: 10px 0;
-  background: transparent;
-  border: none;
-  width: 100%;
-  padding-right: 80px;
-  font-size: 1em;
-}
-
-.new-drink input:focus, .new-liquor input:focus, .new-mixer input:focus {
-  outline: 0;
-}
-*/
-ul {
-  margin: 0;
-  padding: 0;
-  background: white;
-}
-
 .delete {
-  float: right;
-  font-weight: bold;
-  background: none;
+  background: rgba(0, 0, 0, 0.1);
   font-size: 1em;
   border: none;
-  position: relative;
-}
+  border-radius: 6px 6px 0 0;
+  width: 2em;
 
-li {
-  position: relative;
-  list-style: none;
-  padding: 15px;
-  border-bottom: #eee solid 1px;
-}
-
-li .text {
-  margin-left: 10px;
+  /* Position at center bottom */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
 }
 
 li.checked {
+  background: rgba(0, 0, 0, 0.1);
   color: #888;
 }
 
@@ -112,17 +74,39 @@ li.private {
   margin-left: 5px;
 }
 
-@media (max-width: 600px) {
-  li {
-    padding: 12px 15px;
-  }
+.flex-container {
+  padding: 0;
+  margin: 0;
+  list-style: none;
 
-  .search {
-    width: 150px;
-    clear: both;
-  }
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.flex-item {
+  position: relative;
+  background: #EF4E4E;
+  border-radius: 50%;
+  padding: 8px;
+  width: 100px;
+  height: 100px;
+  margin-top: 10px;
+  color: white;
 
-  .new-drink input, .new-liquor input, .new-mixer input {
-    padding-bottom: 5px;
-  }
+  /* Center text inside flex-item */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  word-wrap: break-word;
+  text-align: center;
+
+  /* Show scrollbar if text is too long */
+  overflow: auto;
+
+  /* Make the flex-item appear clickable */
+  cursor: pointer;
 }
