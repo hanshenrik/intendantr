@@ -1,36 +1,22 @@
 @import '{reywood:bootstrap3-sass}/bootstrap';
 
-/* CSS declarations go here */
-/*body {
-  font-family: sans-serif;
-  background-color: #315481;
-  background-image: linear-gradient(to bottom, #315481, #918e82 100%);
-  background-attachment: fixed;
+$default-transition-duration: 111ms
 
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-
-  padding: 0;
-  margin: 0;
-
-  font-size: 14px;
+@mixin border-radius( $radius-top-left,
+                      $radius-top-right: $radius-top-left,
+                      $radius-bottom-right: $radius-top-left,
+                      $radius-bottom-left: $radius-top-left) {
+  -webkit-border-radius: $radius-top-left $radius-top-right $radius-bottom-right $radius-bottom-left;
+     -moz-border-radius: $radius-top-left $radius-top-right $radius-bottom-right $radius-bottom-left;
+      -ms-border-radius: $radius-top-left $radius-top-right $radius-bottom-right $radius-bottom-left;
+          border-radius: $radius-top-left $radius-top-right $radius-bottom-right $radius-bottom-left;
 }
 
-.container {
-  max-width: 600px;
-  margin: 0 auto;
-  min-height: 100%;
-  background: white;
-}
-*/
-header {
-  /*background: #d2edf4;*/
-  /*background-image: linear-gradient(to bottom, #d0edf5, #e1e5f0 100%);*/
-  padding: 20px 15px 15px 15px;
-  position: relative;
+@mixin transition-background($duration: $default-transition-duration) {
+  -webkit-transition: background $duration linear;
+     -moz-transition: background $duration linear;
+      -ms-transition: background $duration linear;
+          transition: background $duration linear;
 }
 
 #login-buttons {
@@ -41,7 +27,7 @@ header {
   background: rgba(0, 0, 0, 0.1);
   font-size: 1em;
   border: none;
-  border-radius: 6px 6px 0 0;
+  @include border-radius(6px, 6px, 0, 0);
   width: 2em;
 
   /* Position at center bottom */
@@ -50,11 +36,23 @@ header {
   left: 0;
   right: 0;
   margin: 0 auto;
+
+  /* Add transition effect for smooth background color change */
+  @include transition-background;
+}
+.delete:hover {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 li.checked {
   background: rgba(0, 0, 0, 0.1);
   color: #888;
+
+  /* Add transition effect for smooth background color change */
+  @include transition-background;
+}
+.flex-item.checked:hover {
+  background: #F7D8D8;
 }
 
 li.checked .text {
@@ -90,7 +88,7 @@ li.private {
 .flex-item {
   position: relative;
   background: #EF4E4E;
-  border-radius: 50%;
+  @include border-radius(50%);
   padding: 8px;
   width: 100px;
   height: 100px;
@@ -109,4 +107,10 @@ li.private {
 
   /* Make the flex-item appear clickable */
   cursor: pointer;
+
+  /* Add transition effect for smooth background color change */
+  @include transition-background;
+}
+.flex-item:not(.checked):hover {
+  background: #E04242;
 }
