@@ -1,6 +1,7 @@
 @import '{reywood:bootstrap3-sass}/bootstrap';
 
 $default-transition-duration: 111ms;
+$border-color: #ddd;
 
 @mixin border-radius( $radius-top-left,
                       $radius-top-right: $radius-top-left,
@@ -44,24 +45,37 @@ $default-transition-duration: 111ms;
   background: rgba(0, 0, 0, 0.2);
 }
 
-li.checked {
-  background: rgba(0, 0, 0, 0.1);
-  color: #888;
-
-  /* Add transition effect for smooth background color change */
-  @include transition-background;
-}
-.flex-item.checked:hover {
-  background: #F7D8D8;
-}
-
-li.checked .text {
-  text-decoration: line-through;
-}
-
 li.private {
   background: #eee;
-  border-color: #ddd;
+  border-color: $border-color;
+}
+
+li.toggle-selected {
+  cursor: pointer;
+  @include transition-background;
+}
+li.new-drink-ingredient {
+  list-style-type: none;
+  line-height: 200%;
+  padding: 0.5em;
+  border-bottom: 1px solid $border-color;
+}
+li.new-drink-ingredient input {
+  line-height: 100%;
+}
+li.new-drink-ingredient:first-child {
+  border-top: 1px solid $border-color;
+}
+li.toggle-selected:hover {
+  background: #e5f5e0;
+}
+li.toggle-selected.selected {
+  background: #a1d99b;
+}
+form.new-ingredient input {
+  border: 0;
+  width: 100%;
+  padding: 0.5em;
 }
 
 /*header .hide-unavailable-drinks, header .hide-unavailable-liquors, header .hide-unavailable-mixers,  {
@@ -85,14 +99,14 @@ li.private {
   flex-flow: row wrap;
   justify-content: space-around;
 }
-.flex-item {
+.flex-item.ingredient {
   position: relative;
   background: #EF4E4E;
   @include border-radius(50%);
-  padding: 8px;
+  padding: 0.5em;
   width: 100px;
   height: 100px;
-  margin-top: 10px;
+  margin-top: 1em;
   color: white;
 
   /* Center text inside flex-item */
@@ -111,6 +125,32 @@ li.private {
   /* Add transition effect for smooth background color change */
   @include transition-background;
 }
-.flex-item:not(.checked):hover {
+.flex-item.ingredient:not(.checked):hover {
   background: #E04242;
+}
+.ingredient.checked {
+  background: rgba(0, 0, 0, 0.1);
+  color: #888;
+
+  /* Add transition effect for smooth background color change */
+  @include transition-background;
+}
+.ingredient.checked:hover {
+  background: #F7D8D8;
+}
+.checked .text {
+  text-decoration: line-through;
+}
+
+
+.flex-item.drink {
+  position: relative;
+  @include border-radius(6px);
+  padding: 0.5em;
+  overflow: auto;
+  border: 1px solid $border-color;
+}
+
+.unavailable-drink {
+  background: #eee;
 }

@@ -28,46 +28,61 @@
         Hide Unavailable Drinks
       </label> -->
 
-      <div class="row">
-        <div class="col-md-6">
-          <!-- <label class="hide-unavailable-liquors">
-            <input type="checkbox" checked="{{hideUnavailableLiquors}}" />
-            Hide Unavailable Liquors
-          </label> -->
+      {{#if currentUser}}
+        <div class="row">
+          <div class="col-md-12">
+            <h1><i class="fa fa-glass"></i> Legg til drink</h1>
+            <div class="row">
+              <div class="col-md-12">
+                <ul>
+                  {{#each ingredients}}
+                    {{> newDrinkIngredient}}
+                  {{/each}}
+                  <li class="new-drink-ingredient">
+                    <form class="new-ingredient">
+                      <!-- <i class="fa fa-plus"></i> -->
+                      <input type="text" name="text" placeholder="Ny ingrediens" />
+                    </form>
+                  </li>
+                </ul>
 
-          <h1><i class="fa fa-flask"></i> Tilgjengelig sprit ({{availableLiquorsCount}})</h1>
-          
-          {{#if currentUser}}
-            <form class="new-liquor input-group input-group-lg">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <form class="new-drink input-group input-group-lg">
               <span class="input-group-addon"><i class="fa fa-plus"></i></span>
-              <input class="form-control" type="text" name="text" placeholder="Legg til ny sprit" />
+              <input class="form-control" type="text" name="text" placeholder="Navn på drink" />
             </form>
-          {{/if}}
-          
+            <button class="btn btn-lg btn-success"><i class="fa fa-plus"></i> Legg til drink!</button>
+          </div>
+        </div>
+      {{/if}}
+
+      <div class="row">
+        <div class="col-md-12">
           <ul class="flex-container">
-            {{#each liquors}}
-              {{> liquor}}
+            {{#each drinks}}
+              {{> drink}}
             {{/each}}
           </ul>
         </div>
-
-        <div class="col-md-6">
-          <!-- <label class="hide-unavailable-mixers">
-            <input type="checkbox" checked="{{hideUnavailableMixers}}" />
-            Hide Unavailable Mixers
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <!-- <label class="hide-unavailable-ingredients">
+            <input type="checkbox" checked="{{hideUnavailableIngredients}}" />
+            Hide Unavailable Ingredients
           </label> -->
 
-          <h1><i class="fa fa-tint"></i> Tilgjengelig blandevann ({{availableMixersCount}})</h1>
-          {{#if currentUser}}
-            <form class="new-mixer input-group input-group-lg">
-              <span class="input-group-addon"><i class="fa fa-plus"></i></span>
-              <input class="form-control" type="text" name="text" placeholder="Legg til nytt blandevann" />
-            </form>
-          {{/if}}
+          <h1>Ingredienser ({{availableIngredientsCount}}/{{totalIngredientsCount}} tilgjengelig)</h1>
           
           <ul class="flex-container">
-            {{#each mixers}}
-              {{> mixer}}
+            {{#each ingredients}}
+              {{> ingredient}}
             {{/each}}
           </ul>
         </div>
@@ -102,9 +117,16 @@
   </div>
 </body>
 
+<template name="newDrinkIngredient">
+  <li class="new-drink-ingredient toggle-selected {{#if selected}}selected{{/if}}">
+    <i class="fa {{#if equals type 'booze'}}fa-flask{{/if}}"></i>
+    <span class="text">{{name}} // {{this._id}}</span>
+    <span class="pull-right"><input type="number" min="1" max="10" /> dl</span>
+  </li>
+</template>
 
-<template name="liquor">
-  <li class="flex-item toggle-checked {{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+<template name="ingredient">
+  <li class="flex-item ingredient toggle-checked {{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
     <span class="text">{{name}}</span>
 
     {{#if isOwner}}
@@ -120,40 +142,32 @@
   </li>
 </template>
 
-<template name="mixer">
-  <li class="flex-item toggle-checked {{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+<template name="drinkIngredient">
+  <li class="{{#if checked}}checked{{/if}}">
     <span class="text">{{name}}</span>
-
-    {{#if isOwner}}
-      <button class="delete">&times;</button>
-      <!-- <button class="toggle-private">
-        {{#if private}}
-          Private
-        {{else}}
-          Public
-        {{/if}}
-      </button> -->
-    {{/if}}
   </li>
 </template>
  
-<!-- <template name="drink">
-  <li class="{{#if checked}}checked{{/if}} {{#if private}}private{{/if}}">
+<template name="drink">
+  <li class="flex-item drink {{#if private}}private{{/if}} {{#if isAvailable}}unavailable-drink{{/if}}">
+    <span class="text"><!-- <strong>{{username}}</strong> -  -->{{name}}</span>
+ 
+    <ul>
+      {{#each getIngredients}}
+        {{> drinkIngredient}}
+      {{/each}}
+    </ul>
+
+    {{#if isOwner}}
     <button class="delete">&times;</button>
- 
-    <input type="checkbox" checked="{{checked}}" class="toggle-checked" />
-
-    {{#if isOwner}}
-      <button class="toggle-private">
+      <!-- <button class="toggle-private">
         {{#if private}}
           Private
         {{else}}
           Public
         {{/if}}
-      </button>
+      </button> -->
     {{/if}}
  
-    <span class="text"><strong>{{username}}</strong> - {{name}} </span> keep this, cool to see who 'created' the drink. charts etc.
   </li>
 </template>
- -->
