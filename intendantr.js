@@ -76,14 +76,15 @@ if (Meteor.isClient) {
       // Prevent default browser form submit
       event.preventDefault();
 
-      // Get value from form element
-      var text = event.target.text.value;
+      // Get values from form element
+      var name = event.target.name.value;
+      var type = event.target.type.value;
 
       // Insert a drink into the collection
-      Meteor.call("addIngredient", text);
+      Meteor.call("addIngredient", name, type);
 
       // Clear form
-      event.target.text.value = "";
+      event.target.name.value = "";
     },
     "change .hide-unavailable-ingredients input": function (event) {
       Session.set("hideUnavailableIngredients", event.target.checked);
@@ -100,13 +101,13 @@ if (Meteor.isClient) {
       ).map( function(item) { return item._id; });
       console.log(ingredientsIds)
       // Get value from form element
-      var name = event.target.text.value;
+      var name = event.target.name.value;
 
       // Insert a drink into the collection
       Meteor.call("addDrink", name, ingredientsIds);
 
       // Clear form
-      event.target.text.value = "";
+      event.target.name.value = "";
 
       // Clear selected
       Meteor.call("clearSelectedIngredients");
@@ -202,10 +203,7 @@ if (Meteor.isClient) {
 }
 
 Meteor.methods({
-  addIngredient: function (name) {
-    // TODO: make input parameter
-    var type = 'booze'
-
+  addIngredient: function (name, type) {
     // Make sure the user is logged in before inserting a drink
     if (! Meteor.userId()) {
       throw new Meteor.Error("not-authorized");

@@ -41,7 +41,12 @@
                   <li class="new-drink-ingredient">
                     <form class="new-ingredient">
                       <!-- <i class="fa fa-plus"></i> -->
-                      <input type="text" name="text" placeholder="Ny ingrediens" />
+                      <input type="text" name="name" placeholder="Ny ingrediens" />
+                      <select name="type">
+                        <option value="booze">Sprit</option>
+                        <option value="mixer">Blandevann</option>
+                        <option value="other">Annet</option>
+                      </select>
                     </form>
                   </li>
                 </ul>
@@ -55,7 +60,7 @@
           <div class="col-md-12 text-center">
             <form class="new-drink input-group input-group-lg">
               <span class="input-group-addon"><i class="fa fa-plus"></i></span>
-              <input class="form-control" type="text" name="text" placeholder="Navn på drink" />
+              <input class="form-control" type="text" name="name" placeholder="Navn på drink" />
             </form>
             <button class="btn btn-lg btn-success"><i class="fa fa-plus"></i> Legg til drink!</button>
           </div>
@@ -119,8 +124,8 @@
 
 <template name="newDrinkIngredient">
   <li class="new-drink-ingredient toggle-selected {{#if selected}}selected{{/if}}">
-    <i class="fa {{#if equals type 'booze'}}fa-flask{{/if}}"></i>
-    <span class="text">{{name}} // {{this._id}}</span>
+    <i class="fa {{#if equals type 'booze'}}fa-flask{{/if}} {{#if equals type 'mixer'}}fa-filter{{/if}} {{#if equals type 'other'}}fa-leaf{{/if}}"></i>
+    <span class="text">{{name}}</span>
     <span class="pull-right"><input type="number" min="1" max="10" /> dl</span>
   </li>
 </template>
